@@ -4,7 +4,15 @@ const app = express();
 
 const server = require("http").createServer(app);
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    // origin: "https://example.com",
+    origin: "*"
+    // methods: ["GET", "POST"],
+    // allowedHeaders: ["my-custom-header"],
+    // credentials: true
+  }
+});
 // line connection creation to connect with server
 io.on("connection", (socket) => {
   console.log("what is socket:", socket);
