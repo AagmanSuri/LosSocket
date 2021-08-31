@@ -12,10 +12,18 @@ function App() {
     socket.emit("chat", { message });
     setMessage("");
   };
+  useEffect(() => {
+    socket.on("chat", (payload) => {
+      setChat([...chat, payload]);
+    });
+  });
   return (
     <div className="App">
       <header className="App-header">
         <h1>Chatty app</h1>
+        {chat.map((payload, index) => {
+          return <p key={index}>{payload.message}</p>;
+        })}
         <form onSubmit={sendChat}>
           <input
             type="text"
